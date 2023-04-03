@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 /**
  * Handles requests for the application home page.
  */
+//수정했으니까 커밋시켜줘야지
 @Controller
 public class HomeController {
 	
