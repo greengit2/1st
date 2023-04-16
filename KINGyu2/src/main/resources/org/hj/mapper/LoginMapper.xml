@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+  
+  <mapper namespace="org.hj.mapper.LoginMapper">
+  
+  	<insert id ="memreg">
+  		insert into member(id, password, name)
+  		values(#{id}, #{password}, #{name});
+  	</insert>
+  
+  	
+  	<select id="login" resultType="org.hj.model.LoginVO">
+  		select id, password
+  		from member
+  		where id=#{id} and password=#{password}
+  	</select>
+  
+  	<!-- loginVO타입에는 배열이 필요하다 값을 여러개 저장해야되기때문 -->
+    <select id="memlist" resultType="org.hj.model.LoginVO">
+    select *
+    from member
+    </select>
+    
+    <!-- memdetail 메소드를 실행시켜줘라 -->
+    <select id="memdetail" resultType="org.hj.model.LoginVO"> <!-- select 된결과를 resultType="org.hj.model.LoginVO"에 저장-->
+    select * 
+    from member
+	where id = #{id} <!-- 메소드 매개변수를 통해 원하는 값(id)을 보낼 수 있다 -->
+    </select> <!-- select된 결과를 LoginVO에 저장 후 return에 싣고 반대로 값을 보내줌 -->
+    
+    
+    <update id="memberModify">
+    update member
+		set name = #{name},
+			password =#{password},
+				phone = #{phone}
+	where id= #{id}
+    </update>
+    
+    
+    <delete id = "memberRemove">
+    	delete from member where id=#{id}
+    </delete>
+    
+  </mapper>
